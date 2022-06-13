@@ -16,7 +16,7 @@ jobs:
       contents: read
       packages: write
 
-    if: "contains(github.event.head commit.message, 'deploy')"
+    if: "contains(github.event.head_commit.message, 'deploy')" # 만약 제일 마지막 commit 메세지에 deploy가 포함된다면 배포시작
     strategy:
       matrix:
         node-version: [16.15.1]
