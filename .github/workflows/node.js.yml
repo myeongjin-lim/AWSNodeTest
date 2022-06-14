@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     permissions:
       contents: read
       packages: write
@@ -28,9 +28,7 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Install dependencies
-      run: |
-        npm install
-        sudo npm install pm2 -g
-    - name: Run PM2
-      run: pm2 start app.js --watch
+    - run: npm ci
+    - run: npm run build --if-present
+    - run: npm run build
+    - run: npm app.js
